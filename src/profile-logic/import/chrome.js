@@ -74,7 +74,7 @@ export function isChromeProfile(profile: mixed): boolean {
   if (Array.isArray(profile)) {
     event = profile[0];
   } else if (
-    profile.hasOwnProperty('traceEvents') &&
+    'traceEvents' in profile &&
     Array.isArray(profile['traceEvents'])
   ) {
     event = profile.traceEvents[0];
@@ -95,7 +95,7 @@ export function isChromeProfile(profile: mixed): boolean {
 export function convertChromeProfile(profile: mixed): Promise<Profile> {
   if (
     !Array.isArray(profile) &&
-    profile.hasOwnProperty('traceEvents') &&
+    'traceEvents' in profile &&
     !Array.isArray(profile['traceEvents'])
   ) {
     throw new Error(

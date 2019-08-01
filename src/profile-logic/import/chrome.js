@@ -102,7 +102,7 @@ export function convertChromeProfile(profile: mixed): Promise<Profile> {
   let event;
   if (Array.isArray(profile)) {
     event = profile;
-  } else if (profile.traceEvents && Array.isArray(profile.traceEvents)) {
+  } else {
     event = profile.traceEvents;
   }
   for (const tracingEvent of event) {

@@ -73,7 +73,10 @@ export function isChromeProfile(profile: mixed): boolean {
   let event;
   if (Array.isArray(profile)) {
     event = profile[0];
-  } else if (profile.traceEvents && Array.isArray(profile.traceEvents)) {
+  } else if (
+    profile.hasOwnProperty('traceEvents') &&
+    Array.isArray(profile.traceEvents)
+  ) {
     event = profile.traceEvents[0];
   }
   if (event) {
@@ -91,8 +94,9 @@ export function isChromeProfile(profile: mixed): boolean {
 
 export function convertChromeProfile(profile: mixed): Promise<Profile> {
   if (
-    (profile.traceEvents && !Array.isArray(profile.traceEvents)) ||
-    !Array.isArray(profile)
+    !Array.isArray(profile) &&
+    profile.hasOwnProperty('traceEvents') &&
+    !Array.isArray(profile.traceEvents)
   ) {
     throw new Error(
       'Expected an array when attempting to convert a Chrome profile.'

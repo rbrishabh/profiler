@@ -101,9 +101,9 @@ export function convertChromeProfile(profile: mixed): Promise<Profile> {
   const eventsByName: Map<string, TracingEventUnion[]> = new Map();
   let event;
   if (Array.isArray(profile)) {
-    event = profile[0];
+    event = profile;
   } else if (profile.traceEvents && Array.isArray(profile.traceEvents)) {
-    event = profile.traceEvents[0];
+    event = profile.traceEvents;
   }
   for (const tracingEvent of event) {
     if (

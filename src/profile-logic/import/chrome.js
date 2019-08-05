@@ -72,7 +72,7 @@ type ScreenshotEvent = TracingEvent<{|
 export function isChromeProfile(profile: mixed): boolean {
   let event;
   if (Array.isArray(profile)) {
-    event = profile[0];   
+    event = profile[0];
   } else if ('traceEvents' in profile && Array.isArray(profile.traceEvents)) {
     event = profile.traceEvents[0];
   }

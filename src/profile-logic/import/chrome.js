@@ -72,15 +72,9 @@ type ScreenshotEvent = TracingEvent<{|
 export function isChromeProfile(profile: mixed): boolean {
   let event;
   if (Array.isArray(profile)) {
-    event = profile[0];
-    console.log(event, "abc**")
-    
-  } else if (
-    'traceEvents' in profile &&
-    Array.isArray(profile['traceEvents'])
-  ) {
+    event = profile[0];   
+  } else if ('traceEvents' in profile && Array.isArray(profile.traceEvents)) {
     event = profile.traceEvents[0];
-    console.log(event, "abcde**")
   }
   if (event) {
     // Lightly check that some properties exist that are in the TracingEvent.
@@ -99,7 +93,7 @@ export function convertChromeProfile(profile: mixed): Promise<Profile> {
   if (
     !Array.isArray(profile) &&
     'traceEvents' in profile &&
-    !Array.isArray(profile['traceEvents'])
+    !Array.isArray(profile.traceEvents)
   ) {
     throw new Error(
       'Expected an array when attempting to convert a Chrome profile.'
@@ -109,10 +103,8 @@ export function convertChromeProfile(profile: mixed): Promise<Profile> {
   let event;
   if (Array.isArray(profile)) {
     event = profile;
-    console.log(event, "abc");
   } else {
     event = profile.traceEvents;
-    console.log(event, "abcasde");
   }
   for (const tracingEvent of event) {
     if (
